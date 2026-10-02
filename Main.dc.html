@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Donde Mario — Brasa y Marea</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&amp;family=Outfit:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0A0A0A}
+a{color:#D9A878}a:hover{color:#F0C9A0}
+.a-root{--bg:#0A0A0A;--bg2:#111111;--bg3:#181818;--bronze:#C99566;--bronze-hi:#E2B588;--ink:#F5F1EB;--mute:rgba(245,241,235,.68);--line:rgba(245,241,235,.12);--ease:cubic-bezier(.23,1,.32,1);font-family:'Outfit',system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:clip}
+.a-root ::selection{background:#C99566;color:#0A0A0A}
+.a-root *{box-sizing:border-box}
+.a-root :focus-visible{outline:2px solid #E2B588;outline-offset:3px;border-radius:2px}
+.disp{font-family:'Antonio',sans-serif;text-transform:uppercase;font-weight:700;letter-spacing:-.01em;line-height:.92;margin:0}
+.micro{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+.wrap{width:100%;max-width:1360px;margin:0 auto;padding:0 clamp(1rem,4vw,3.5rem)}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;margin-bottom:-5rem;height:5rem;display:flex;align-items:center;animation:navSolid linear both;animation-timeline:scroll();animation-range:0 160px}
+@keyframes navSolid{from{background:rgba(10,10,10,0);backdrop-filter:blur(0);box-shadow:0 1px 0 rgba(245,241,235,0)}to{background:rgba(10,10,10,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(245,241,235,.08)}}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--ink)}
+.brand:hover{color:var(--ink)}
+.navlinks{display:flex;align-items:center;gap:2.25rem}
+.navlink{position:relative;color:rgba(245,241,235,.82);text-decoration:none;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding:.5rem 0;transition:color .2s ease}
+.navlink::after{content:"";position:absolute;left:0;right:0;bottom:.15rem;height:1px;background:#C99566;transform:scaleX(0);transform-origin:right;transition:transform .32s var(--ease)}
+.navlink:hover{color:#F5F1EB}.navlink:hover::after{transform:scaleX(1);transform-origin:left}
+.nav .burger{display:none}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.75rem;min-height:3.25rem;padding:0 1.6rem;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border-radius:999px;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background-color .25s ease,color .25s ease,border-color .25s ease,transform .16s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn svg{transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn-fill{background:#C99566;color:#0A0A0A}
+.btn-fill:hover{background:#E2B588;color:#0A0A0A}
+.btn-line{border-color:rgba(245,241,235,.4);color:#F5F1EB;background:rgba(10,10,10,.2)}
+.btn-line:hover{border-color:#F5F1EB;background:rgba(245,241,235,.08);color:#F5F1EB}
+.btn-sm{min-height:2.75rem;padding:0 1.2rem}
+/* hero */
+.hero{position:relative;min-height:56rem;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 70%;z-index:-2;animation:heroZoom 2.4s var(--ease) both}
+@keyframes heroZoom{from{transform:scale(1.12);filter:brightness(.4)}to{transform:scale(1);filter:brightness(1)}}
+.hero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,10,10,.55) 0%,rgba(10,10,10,.15) 30%,rgba(10,10,10,.55) 60%,#0A0A0A 100%),linear-gradient(90deg,rgba(10,10,10,.75) 0%,rgba(10,10,10,0) 70%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:2rem;padding-bottom:4.5rem;padding-top:9rem}
+.hero h1{font-size:clamp(3.4rem,8.4vw,6rem)}
+.line{display:block;overflow:hidden;padding-bottom:.04em}
+.line>span{display:block;animation:rise .9s var(--ease) both}
+.line:nth-child(2)>span{animation-delay:.08s}.line:nth-child(3)>span{animation-delay:.16s}
+@keyframes rise{from{transform:translateY(105%)}to{transform:translateY(0)}}
+.fade{animation:fadeUp .8s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:.9rem;color:rgba(245,241,235,.7);text-decoration:none}
+.scroll-cue:hover{color:#F5F1EB}
+.cue-track{width:1px;height:4.5rem;background:rgba(245,241,235,.2);position:relative;overflow:hidden}
+.cue-track::after{content:"";position:absolute;left:0;top:0;width:1px;height:40%;background:#C99566;animation:cue 2.2s cubic-bezier(.77,0,.175,1) infinite}
+@keyframes cue{from{transform:translateY(-100%)}to{transform:translateY(260%)}}
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,6vw,6rem);align-items:start;padding-top:7rem;padding-bottom:8rem}
+.intro-photo{position:relative;margin-top:-2rem}
+.intro-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 40%;display:block;border-radius:4px}
+.cap{position:absolute;left:1rem;bottom:1rem;right:1rem;display:flex;justify-content:space-between;color:#F5F1EB;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:3rem 0 0;border-top:1px solid var(--line)}
+.facts>div{padding:1.25rem 1.25rem 0 0}
+.facts dt{color:var(--mute);margin-bottom:.5rem}
+.facts dd{margin:0;font-size:1.05rem;line-height:1.4}
+.quote{margin:3rem 0 0;padding:0;font-family:'Antonio',sans-serif;font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.3;color:#E2B588;text-transform:none;font-weight:400;max-width:28ch}
+/* menu */
+.menu{background:var(--bg2);padding:7rem 0 7.5rem;position:relative}
+.menu-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.tabs{display:flex;gap:.5rem;margin:2.75rem 0 3rem;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;min-height:2.9rem;padding:0 1.25rem;border-radius:999px;border:1px solid rgba(245,241,235,.18);background:transparent;color:rgba(245,241,235,.78);font-family:'Outfit',sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:background-color .22s ease,color .22s ease,border-color .22s ease,transform .16s var(--ease)}
+.tab:hover{border-color:rgba(245,241,235,.5);color:#F5F1EB}
+.tab:active{transform:scale(.97)}
+.tab[aria-pressed="true"]{background:#F5F1EB;color:#0A0A0A;border-color:#F5F1EB}
+.panel{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,4vw,4rem);animation:panelIn .34s var(--ease) both}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.feat{position:relative;overflow:hidden;border-radius:4px;min-height:30rem;background:#181818}
+.feat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.feat:hover img{transform:scale(1.04)}
+.feat-body{position:absolute;left:0;right:0;bottom:0;padding:2rem;background:linear-gradient(180deg,rgba(10,10,10,0),rgba(10,10,10,.92) 65%)}
+.feat-body h3{font-size:clamp(2rem,3.4vw,3rem)}
+.tag{display:inline-block;padding:.35rem .7rem;border:1px solid rgba(201,149,102,.6);color:#E2B588;border-radius:999px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.items{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem 1.5rem;padding:1.4rem 0;border-bottom:1px solid var(--line)}
+.item h4{margin:0;font-family:'Antonio',sans-serif;font-weight:600;text-transform:uppercase;font-size:1.45rem;letter-spacing:.01em}
+.item p{margin:0;color:var(--mute);font-size:.95rem;line-height:1.55;grid-column:1/-1;max-width:46ch}
+.price{font-family:'Antonio',sans-serif;font-size:1.2rem;color:#E2B588;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ph{color:rgba(245,241,235,.5);font-style:normal;letter-spacing:.04em}
+.ph-frame{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#151515;outline:1px dashed rgba(245,241,235,.22);outline-offset:-12px;color:rgba(245,241,235,.55);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase}
+.menu-foot{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--line)}
+/* moment */
+.moment{position:relative;min-height:46rem;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.moment img{position:absolute;inset:-8% 0;width:100%;height:116%;object-fit:cover;z-index:-2;animation:drift linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+@keyframes drift{from{transform:translateY(-5%)}to{transform:translateY(5%)}}
+.moment::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(10,10,10,.88) 0%,rgba(10,10,10,.45) 55%,rgba(10,10,10,.2) 100%)}
+.moment h2{font-size:clamp(3rem,7vw,6rem)}
+/* gallery */
+.gal{padding-top:8rem;padding-bottom:8rem}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:9rem;gap:.75rem;margin-top:3rem}
+.g{position:relative;overflow:hidden;border-radius:4px;margin:0;background:#181818}
+.g img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease),filter .6s ease;filter:saturate(.92)}
+.g:hover img{transform:scale(1.045);filter:saturate(1.05)}
+.g figcaption{position:absolute;left:0;right:0;bottom:0;padding:1rem 1.1rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#F5F1EB;background:linear-gradient(180deg,rgba(10,10,10,0),rgba(10,10,10,.8));opacity:0;transform:translateY(6px);transition:opacity .3s ease,transform .4s var(--ease)}
+.g:hover figcaption{opacity:1;transform:none}
+.g1{grid-column:1/8;grid-row:1/5}.g2{grid-column:8/13;grid-row:1/3}.g3{grid-column:8/13;grid-row:3/6}.g4{grid-column:1/4;grid-row:5/8}.g5{grid-column:4/8;grid-row:5/8}.g6{grid-column:8/13;grid-row:6/8}
+@supports (animation-timeline:view()){.reveal{animation:revealIn linear both;animation-timeline:view();animation-range:entry 0% entry 55%}@keyframes revealIn{from{opacity:0;transform:translateY(28px);clip-path:inset(0 0 12% 0)}to{opacity:1;transform:none;clip-path:inset(0 0 0 0)}}}
+/* locations */
+.loc{background:var(--bg2);padding:8rem 0}
+.loc-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(2rem,5vw,5rem);margin-top:3rem}
+.loc-pick{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.loc-btn{width:100%;display:flex;align-items:baseline;gap:1.25rem;padding:1.6rem 0;background:none;border:0;border-bottom:1px solid var(--line);color:rgba(245,241,235,.5);cursor:pointer;text-align:left;font-family:'Antonio',sans-serif;text-transform:uppercase;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;transition:color .25s ease}
+.loc-btn small{font-family:'Outfit',sans-serif;font-size:.8rem;letter-spacing:.16em;font-weight:500}
+.loc-btn:hover{color:rgba(245,241,235,.85)}
+.loc-btn[aria-pressed="true"]{color:#F5F1EB}
+.loc-btn[aria-pressed="true"] small{color:#E2B588}
+.loc-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:#181818;border-radius:4px;overflow:hidden;animation:panelIn .34s var(--ease) both}
+.loc-media{position:relative;min-height:30rem}
+.loc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.loc-info{padding:2.5rem;display:flex;flex-direction:column;gap:1.6rem}
+.row{display:grid;grid-template-columns:1.5rem minmax(0,1fr);gap:.9rem;align-items:start;font-size:1rem;line-height:1.5}
+.row svg{margin-top:.15rem;color:#C99566}
+.row dt{color:var(--mute);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.2rem}
+.row dd{margin:0}
+.btn-disabled{border-color:rgba(245,241,235,.18);color:rgba(245,241,235,.55);cursor:not-allowed;background:transparent}
+/* final */
+.final{position:relative;min-height:44rem;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;isolation:isolate}
+.final img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.final::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center,rgba(10,10,10,.55) 0%,rgba(10,10,10,.88) 70%)}
+.final h2{font-size:clamp(3.4rem,9vw,6rem)}
+/* footer */
+.foot{padding:5rem 0 2.5rem;border-top:1px solid var(--line)}
+.foot-grid{display:grid;grid-template-columns:minmax(0,4fr) repeat(3,minmax(0,2fr));gap:2.5rem}
+.foot h3{margin:0 0 1.1rem;color:var(--mute)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
+.foot a{color:#F5F1EB;text-decoration:none;font-size:.95rem}
+.foot a:hover{color:#E2B588}
+.legal{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line);color:rgba(245,241,235,.55);font-size:.8rem}
+.mnav{position:fixed;inset:0;z-index:60;background:#0A0A0A;display:flex;flex-direction:column;padding:1.25rem 1rem 2rem;animation:panelIn .28s var(--ease) both}
+.mnav a.big{font-family:'Antonio',sans-serif;text-transform:uppercase;font-size:2.6rem;font-weight:700;color:#F5F1EB;text-decoration:none;padding:.6rem 0;border-bottom:1px solid rgba(245,241,235,.1)}
+@media (max-width:980px){
+.navlinks{display:none}.nav .burger{display:inline-flex}
+.hero{min-height:44rem}.hero-grid{grid-template-columns:minmax(0,1fr);padding-bottom:3rem}
+.scroll-cue{display:none}
+.intro{grid-template-columns:minmax(0,1fr);padding-top:4rem;padding-bottom:5rem}
+.intro-photo{margin-top:0;max-width:30rem}
+.panel{grid-template-columns:minmax(0,1fr)}
+.feat{min-height:22rem}
+.loc-grid{grid-template-columns:minmax(0,1fr)}
+.loc-card{grid-template-columns:minmax(0,1fr)}.loc-media{min-height:16rem}
+.foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid{grid-auto-rows:7rem}
+.g1{grid-column:1/-1;grid-row:1/4}.g2{grid-column:1/7;grid-row:4/7}.g3{grid-column:7/13;grid-row:4/7}.g4{grid-column:1/-1;grid-row:7/10}.g5{grid-column:1/7;grid-row:10/12}.g6{grid-column:7/13;grid-row:10/12}
+.g figcaption{opacity:1;transform:none}
+}
+@media (max-width:600px){
+.facts{grid-template-columns:minmax(0,1fr)}
+.menu,.loc{padding:5rem 0}.gal{padding-top:5rem;padding-bottom:5rem}
+.moment::before{background:linear-gradient(180deg,rgba(10,10,10,.35) 0%,rgba(10,10,10,.85) 100%)}
+.moment{min-height:34rem}.final{min-height:36rem}
+.foot-grid{grid-template-columns:minmax(0,1fr)}
+.loc-info{padding:1.5rem}
+.feat-body{padding:1.25rem}
+.btn{padding:0 1.2rem}
+.hero-ctas{flex-direction:column;align-items:stretch}
+.hero-ctas .btn{justify-content:center}
+}
+.locsw{display:flex;gap:.4rem;flex-wrap:wrap}.lsw{min-height:2.9rem;padding:0 1.1rem;border-radius:999px;border:1px solid rgba(201,149,102,.5);background:transparent;color:#E2B588;font-family:Outfit,sans-serif;font-size:.8rem;letter-spacing:.02em;font-weight:500;cursor:pointer;transition:background-color .2s ease,color .2s ease}.lsw[aria-pressed="true"]{background:#C99566;color:#0A0A0A}.panel{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}.feat{position:sticky;top:6rem;align-self:start;min-height:34rem}.items2{columns:2;column-gap:2.5rem;border-top:0}.items2 .item{break-inside:avoid;border-top:1px solid var(--line);border-bottom:0;padding:1.1rem 0}.items2 .item h4{font-size:1.2rem}.items2 .item p{font-size:.85rem}.loc-btn span{display:flex;flex-direction:column}.lb{font-style:normal;font-family:Outfit,sans-serif;font-size:.8rem;letter-spacing:.14em;color:rgba(245,241,235,.5);margin-top:.35rem}@media (max-width:980px){.panel{grid-template-columns:minmax(0,1fr)}.items2{columns:1}.feat{position:relative;top:0;min-height:20rem}}
+.lr{display:grid;grid-template-columns:1.3rem minmax(0,1fr);gap:.8rem;padding:.8rem 0;border-bottom:1px solid var(--line);line-height:1.5}.lr svg{margin-top:.15rem;color:#C99566}.lr a{color:inherit}.blogo{height:64px;width:auto;border-radius:10px;background:#fff;padding:4px;display:block}.mfade{animation:mfade .4s cubic-bezier(.23,1,.32,1) both}@keyframes mfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.a-root *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="a-root">
+
+<header class="nav">
+<nav class="wrap nav-in" aria-label="Principal">
+<a class="brand" href="#inicio" aria-label="Donde Mario, inicio">
+<img src="./assets/5feb9e093da5fcacbec4291113d092da.png" alt="" width="44" height="44" style="width: 44px; height: 44px; display: block">
+<span class="disp" style="font-size: 1.35rem; letter-spacing: .04em">Donde Mario</span>
+</a>
+<div class="navlinks">
+<a class="navlink" href="#menu">Menú</a>
+<a class="navlink" href="#experiencia">Experiencia</a>
+<a class="navlink" href="#ubicaciones">Ubicaciones</a>
+<a class="navlink" href="#contacto">Contacto</a>
+<a class="btn btn-fill btn-sm" href="#menu">Ver menú</a>
+</div>
+<button class="burger btn btn-line btn-sm" type="button" aria-label="Abrir menú" aria-expanded="{{navOpen}}" onClick="{{openNav}}" style="width: 2.9rem; padding: 0; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+</button>
+</nav>
+</header>
+
+<sc-if value="{{navOpen}}" hint-placeholder-val="{{false}}">
+<div class="mnav" role="dialog" aria-label="Navegación">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem">
+<img src="./assets/5feb9e093da5fcacbec4291113d092da.png" alt="Donde Mario" width="44" height="44" style="width: 44px; height: 44px">
+<button class="btn btn-line btn-sm" type="button" aria-label="Cerrar menú" onClick="{{closeNav}}" style="width: 2.9rem; padding: 0; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button>
+</div>
+<a class="big" href="#menu" onClick="{{closeNav}}">Menú</a>
+<a class="big" href="#experiencia" onClick="{{closeNav}}">Experiencia</a>
+<a class="big" href="#ubicaciones" onClick="{{closeNav}}">Ubicaciones</a>
+<a class="big" href="#contacto" onClick="{{closeNav}}">Contacto</a>
+<a class="btn btn-fill" href="https://wa.me/50689050330" style="margin-top: auto; justify-content: center">Escribir por WhatsApp</a>
+</div>
+</sc-if>
+
+<main>
+<section class="hero" id="inicio" aria-labelledby="hero-t">
+<img class="hero-img" src="./assets/f88afde2809d9b48eb2084ddc3d1a3fa.jpg" alt="Fachada de Restaurante Donde Mario, Seafood &amp; Steak House, iluminada al anochecer en Sardinal">
+<div class="hero-shade"></div>
+<div class="wrap hero-grid">
+<div>
+<h1 class="disp" id="hero-t">
+<span class="line"><span>Sabor auténtico</span></span>
+<span class="line"><span>de <span style="color: #E2B588">Guanacaste</span></span></span>
+</h1>
+<p class="fade" style="animation-delay: .35s; margin: 1.75rem 0 0; max-width: 34rem; font-size: clamp(1.05rem,1.4vw,1.25rem); line-height: 1.55; color: rgba(245,241,235,.86); font-weight: 300">Tradición costarricense, mariscos y parrilla en un ambiente que se disfruta. Sardinal y Playa Hermosa, Guanacaste.</p>
+<div class="fade hero-ctas" style="animation-delay: .5s; display: flex; gap: .75rem; margin-top: 2.25rem; flex-wrap: wrap">
+<a class="btn btn-fill" href="#menu">Ver menú
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+<a class="btn btn-line" href="#ubicaciones">Explorar ubicaciones</a>
+</div>
+</div>
+<a class="scroll-cue fade micro" href="#experiencia" style="animation-delay: .8s" aria-label="Bajar a la experiencia">
+<span style="writing-mode: vertical-rl">Desliza</span>
+<span class="cue-track"></span>
+</a>
+</div>
+</section>
+
+<section class="wrap intro" id="experiencia" aria-labelledby="intro-t">
+<figure class="intro-photo reveal" style="margin: 0">
+<img src="./assets/30a92be9d945b77a24f025213c81f9db.jpg" alt="Mario brinda con una copa de sangría frente al restaurante, bajo el letrero pintado de mariscos" loading="lazy">
+<figcaption class="cap"><span>Mario</span><span>Sardinal, GTE</span></figcaption>
+</figure>
+<div class="reveal">
+<h2 class="disp" id="intro-t" style="font-size: clamp(2.8rem,5.6vw,5.25rem)">Mar, brasa<br>y casa.</h2>
+<p style="margin: 2rem 0 0; font-size: clamp(1.1rem,1.5vw,1.3rem); line-height: 1.6; max-width: 36rem; font-weight: 300">Donde Mario nació en Sardinal y hoy tiene una segunda casa frente al mar: La Casita del Marisco, en Playa Hermosa. Pescado, mariscos y cortes a la parrilla con porciones generosas y atención de casa.</p>
+<p style="margin: 1.25rem 0 0; font-size: 1.05rem; line-height: 1.65; max-width: 36rem; color: rgba(245,241,235,.68)">Abajo se come sin prisa; arriba, la terraza recibe cumpleaños, jubilaciones y mesas largas al atardecer.</p>
+<blockquote class="quote">“Hace mucho no recibía un servicio tan espectacular.”<footer class="micro" style="font-family: 'Outfit',sans-serif; color: rgba(245,241,235,.6); margin-top: .9rem; letter-spacing: .16em">Reseña en Google</footer></blockquote>
+<dl class="facts">
+<div><dt class="micro">Horario</dt><dd>Sardinal 11:00 a. m. – 9:30 p. m.<br>Playa Hermosa 11:30 a. m. – 9:00 p. m.</dd></div>
+<div><dt class="micro">En Google</dt><dd>4,5 de 5<br>98 reseñas</dd></div>
+<div><dt class="micro">Teléfonos</dt><dd><a href="tel:+50689050330" style="color: #F5F1EB; text-decoration: none">8905 0330</a> · Sardinal<br><a href="tel:+50626720226" style="color: #F5F1EB; text-decoration: none">2672 0226</a> · Playa Hermosa</dd></div>
+</dl>
+</div>
+</section>
+
+<section class="menu" id="menu" aria-labelledby="menu-t">
+<div class="wrap">
+<div class="menu-head">
+<h2 class="disp" id="menu-t" style="font-size: clamp(3rem,7vw,6rem)">La carta</h2>
+<div class="locsw" role="group" aria-label="Elegir la carta de cada sucursal">
+<button class="lsw" type="button" aria-pressed="{{l1}}" onClick="{{pickL1}}">Sardinal · Donde Mario</button>
+<button class="lsw" type="button" aria-pressed="{{l2}}" onClick="{{pickL2}}">Playa Hermosa · La Casita del Marisco</button>
+</div>
+</div>
+<div class="tabs" role="group" aria-label="Categorías del menú">
+<button class="tab" type="button" aria-pressed="{{c1}}" onClick="{{pick1}}">Entradas</button>
+<button class="tab" type="button" aria-pressed="{{c2}}" onClick="{{pick2}}">Sopas, arroz y pasta</button>
+<button class="tab" type="button" aria-pressed="{{c3}}" onClick="{{pick3}}">Mariscos y camarones</button>
+<button class="tab" type="button" aria-pressed="{{c4}}" onClick="{{pick4}}">Pescados</button>
+<button class="tab" type="button" aria-pressed="{{c5}}" onClick="{{pick5}}">Langosta</button>
+<button class="tab" type="button" aria-pressed="{{c6}}" onClick="{{pick6}}">Carnes y pollo</button>
+</div>
+<div class="panel">
+<figure class="feat" style="margin: 0"><img src="{{catImg}}" alt="{{catAlt}}" loading="lazy">
+<figcaption class="feat-body"><span class="tag">{{L.brand}} · {{L.place}}</span><h3 class="disp" style="margin-top: .9rem">{{catTitle}}</h3><p style="margin: .6rem 0 0; color: rgba(245,241,235,.72)">{{catCount}} opciones en la carta</p></figcaption>
+</figure>
+<ul class="items items2 mfade">
+<sc-for list="{{items}}" as="it" hint-placeholder-count="8">
+<li class="item"><h4>{{it.n}}</h4><span class="price">{{it.p}}</span><p>{{it.e}}</p></li>
+</sc-for>
+</ul>
+</div>
+<div class="menu-foot">
+<p style="margin: 0; color: rgba(245,241,235,.62); font-size: .9rem; max-width: 40rem; line-height: 1.55">{{L.tax}} Carta de {{L.full}}.</p>
+<a class="btn btn-line" href="{{L.igHref}}">Ver {{L.ig}} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a>
+</div>
+</div>
+</section>
+
+<section class="moment" aria-labelledby="moment-t">
+<img src="./assets/400030e7dfade2c139c35146d23a1627.jpg" alt="Dos copas de sangría sobre una mesa frente al mar en Playa Hermosa" loading="lazy">
+<div class="wrap">
+<h2 class="disp reveal" id="moment-t">El sabor de la costa<br><span style="color: #E2B588">se siente diferente.</span></h2>
+<p class="reveal" style="margin: 1.75rem 0 0; max-width: 30rem; font-size: 1.15rem; line-height: 1.6; color: rgba(245,241,235,.86); font-weight: 300">Sangría fría frente al mar en Playa Hermosa, brisa de Guanacaste y la cocina encendida desde el mediodía.</p>
+</div>
+</section>
+
+<section class="gal wrap" aria-labelledby="gal-t">
+<h2 class="disp reveal" id="gal-t" style="font-size: clamp(2.8rem,6vw,5rem)">Quiero estar ahí</h2>
+<div class="grid">
+<figure class="g g1 reveal"><img src="./assets/0417de9f369187f99884a4a6e80f2ba1.jpg" alt="Platón de mariscos con langosta, mejillones y camarones" loading="lazy"><figcaption>Platón de mariscos</figcaption></figure>
+<figure class="g g2 reveal"><img src="./assets/e6c93ae446208cdef185b670158d13a2.jpg" alt="Comensales al atardecer frente al mar en La Casita del Marisco" loading="lazy"><figcaption>Atardecer en Playa Hermosa</figcaption></figure>
+<figure class="g g3 reveal"><img src="./assets/30a92be9d945b77a24f025213c81f9db.jpg" alt="Mario frente al restaurante con una sangría" loading="lazy" style="object-position: 50% 35%"><figcaption>Bienvenidos donde Mario</figcaption></figure>
+<figure class="g g4 reveal"><img src="./assets/f8b7f883183dbade92c341ae3889aee4.jpg" alt="Langostas servidas con puré y vegetales" loading="lazy"><figcaption>Langosta</figcaption></figure>
+<figure class="g g5 reveal"><img src="./assets/1304f3f2333fdd2340f856c0261c5cc8.jpg" alt="Pargo entero a la plancha con vegetales" loading="lazy"><figcaption>Pargo entero</figcaption></figure>
+<figure class="g g6 reveal"><img src="./assets/29de63f50c2abb0dcc2e6b66443dc2e7.jpg" alt="Mojito de fresa sobre una mesa con vista a la playa" loading="lazy" style="object-position: 50% 60%"><figcaption>Frente al mar</figcaption></figure>
+</div>
+</section>
+
+<section class="loc" id="ubicaciones" aria-labelledby="loc-t">
+<div class="wrap">
+<h2 class="disp reveal" id="loc-t" style="font-size: clamp(2.8rem,6vw,5rem)">Dos casas,<br>un mismo sabor</h2>
+<div class="loc-grid">
+<ul class="loc-pick" role="group" aria-label="Elegir sucursal">
+<li><button class="loc-btn" type="button" aria-pressed="{{l1}}" onClick="{{pickL1}}"><small>01</small><span>Sardinal<em class="lb">Donde Mario</em></span></button></li>
+<li><button class="loc-btn" type="button" aria-pressed="{{l2}}" onClick="{{pickL2}}"><small>02</small><span>Playa Hermosa<em class="lb">La Casita del Marisco</em></span></button></li>
+</ul>
+<article class="loc-card mfade">
+<div class="loc-media"><img src="{{L.img}}" alt="{{L.imgAlt}}" loading="lazy"></div>
+<div class="loc-info">
+<div style="display: flex; align-items: center; gap: 1rem"><img class="blogo" src="{{L.logo}}" alt="Logo de {{L.brand}}"><div><h3 class="disp" style="font-size: 2.3rem">{{L.place}}</h3><p class="micro" style="margin: .35rem 0 0; color: #E2B588">{{L.brand}}</p></div></div>
+<div><div class="lr"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>{{L.addr}}</span></div>
+<div class="lr"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg><span>{{L.hours}}</span></div>
+<div class="lr"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span><a href="{{L.telHref}}">{{L.tel}}</a></span></div>
+<div class="lr"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path></svg><span><a href="{{L.igHref}}">{{L.ig}}</a></span></div></div>
+<div style="display: flex; gap: .6rem; flex-wrap: wrap; margin-top: auto">
+<a class="btn btn-fill" href="{{L.maps}}">Cómo llegar <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a>
+<a class="btn btn-line" href="{{L.telHref}}">Llamar</a>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="final" aria-labelledby="final-t">
+<img src="./assets/815c0ce9db931a4e5df4a0be3a222ffc.jpg" alt="" loading="lazy">
+<div class="wrap">
+<h2 class="disp reveal" id="final-t">Guanacaste<br><span style="color: #E2B588">sabe mejor aquí.</span></h2>
+<div class="reveal hero-ctas" style="display: flex; gap: .75rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap">
+<a class="btn btn-fill" href="#menu">Ver menú</a>
+<a class="btn btn-line" href="#ubicaciones">Encontrar sucursal</a>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="foot" id="contacto">
+<div class="wrap">
+<div class="foot-grid">
+<div>
+<div class="brand" style="margin-bottom: 1.25rem"><img src="./assets/5feb9e093da5fcacbec4291113d092da.png" alt="" width="56" height="56" style="width: 56px; height: 56px"><span class="disp" style="font-size: 1.6rem; letter-spacing: .04em">Donde Mario</span></div>
+<p style="margin: 0; color: rgba(245,241,235,.68); line-height: 1.6; max-width: 22rem">Bar y restaurante de mariscos y parrilla en Sardinal y Playa Hermosa, Guanacaste.</p>
+</div>
+<div><h3 class="micro">Navegar</h3><ul><li><a href="#menu">Menú</a></li><li><a href="#experiencia">Experiencia</a></li><li><a href="#ubicaciones">Ubicaciones</a></li><li><a href="#menu">Carta completa</a></li></ul></div>
+<div><h3 class="micro">Contacto</h3><ul><li><a href="tel:+50689050330">Sardinal 8905 0330</a></li><li><a href="tel:+50626720226">Playa Hermosa 2672 0226</a></li><li><a href="https://wa.me/50689050330">WhatsApp</a></li><li><a href="https://www.google.com/maps/place/Donde+Mario/@10.5060659,-85.6500054,17z/data=!3m1!4b1!4m6!3m5!1s0x8f9e2bb7d3ab4127:0x78598b9c78a79f5a!8m2!3d10.5060659!4d-85.6474305!16s%2Fg%2F11krfmssw2">Google Maps</a></li></ul></div>
+<div><h3 class="micro">Síguenos</h3><ul><li><a href="https://www.facebook.com/p/Bar-y-Restaurante-Donde-Mario-100070538992558/">Facebook</a></li><li><a href="https://www.instagram.com/dondemariorestobar/">Instagram Donde Mario</a></li><li><a href="https://www.instagram.com/la_casitadel_marisco/">Instagram La Casita</a></li></ul></div>
+</div>
+<div class="legal"><span>© 2026 Bar y Restaurante Donde Mario</span><span>Sardinal · Playa Hermosa — Guanacaste, Costa Rica</span></div>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":7470}}'>
+const MENU = [{"t": "Entradas", "img": "./assets/7898e1c06cf812f55856d7da68f863a0.jpg", "alt": "Sashimi de atún fresco con wasabi", "L1": [{"n": "Ceviche de pescado", "e": "Fish ceviche", "p": "₡4.000", "g": "Entradas"}, {"n": "Ceviche de camarón", "e": "Shrimp ceviche", "p": "₡5.500", "g": "Entradas"}, {"n": "Ceviche mixto", "e": "Seafood ceviche", "p": "₡6.000", "g": "Entradas"}, {"n": "Jumbo cocktail", "e": "Jumbo shrimp cocktail", "p": "₡8.000", "g": "Entradas"}, {"n": "Sashimi de atún fresco con wasabi", "e": "Fresh tuna sashimi with wasabi", "p": "₡6.700", "g": "Entradas"}, {"n": "Ensalada de lomito y queso azul", "e": "Tenderloin & blue cheese salad", "p": "₡6.000", "g": "Entradas"}, {"n": "Ensalada César con atún o pollo", "e": "Caesar salad (tuna or chicken)", "p": "₡6.000", "g": "Entradas"}, {"n": "Ensalada de aguacate y camarón", "e": "Avocado and shrimp salad", "p": "₡6.000", "g": "Entradas"}, {"n": "Ensalada mixta", "e": "Mixed salad", "p": "₡4.000", "g": "Entradas"}, {"n": "Calamar empanizado en salsa tártara", "e": "Breaded squid with tartar sauce", "p": "₡5.000", "g": "Aperitivos calientes"}, {"n": "Camarón empanizado con salsa cocktail", "e": "Breaded shrimp with cocktail sauce", "p": "₡5.500", "g": "Aperitivos calientes"}, {"n": "Dedos de pollo con mostaza miel", "e": "Chicken fingers with honey mustard", "p": "₡4.000", "g": "Aperitivos calientes"}, {"n": "Dedos de pescado con salsa tártara", "e": "Fish fingers with tartar sauce", "p": "₡4.000", "g": "Aperitivos calientes"}, {"n": "Hamburguesa", "e": "Hamburger", "p": "₡4.000", "g": "Aperitivos calientes"}, {"n": "Salchipapas", "e": "Salchipapas", "p": "₡3.000", "g": "Aperitivos calientes"}], "L2": [{"n": "Ceviche de pescado", "e": "Fish ceviche", "p": "₡4.900", "g": "Entradas"}, {"n": "Ceviche de camarón", "e": "Shrimp ceviche", "p": "₡6.100", "g": "Entradas"}, {"n": "Ceviche mixto", "e": "Seafood ceviche", "p": "₡6.700", "g": "Entradas"}, {"n": "Jumbo cocktail", "e": "Jumbo shrimp cocktail", "p": "₡9.000", "g": "Entradas"}, {"n": "Sashimi de atún fresco con wasabi", "e": "Fresh tuna sashimi with wasabi", "p": "₡6.700", "g": "Entradas"}, {"n": "Ensalada de lomito y queso azul", "e": "Tenderloin & blue cheese salad", "p": "₡6.100", "g": "Entradas"}, {"n": "Ensalada César con atún o pollo", "e": "Caesar salad (tuna or chicken)", "p": "₡6.100", "g": "Entradas"}, {"n": "Ensalada de aguacate y camarón", "e": "Avocado and shrimp salad", "p": "₡6.100", "g": "Entradas"}, {"n": "Ensalada mixta", "e": "Mixed salad", "p": "₡4.900", "g": "Entradas"}, {"n": "Calamar empanizado en salsa tártara", "e": "Breaded squid with tartar sauce", "p": "₡6.100", "g": "Aperitivos calientes"}, {"n": "Camarón empanizado con salsa cocktail", "e": "Breaded shrimp with cocktail sauce", "p": "₡6.100", "g": "Aperitivos calientes"}, {"n": "Dedos de pollo con mostaza miel", "e": "Chicken fingers with honey mustard", "p": "₡4.900", "g": "Aperitivos calientes"}, {"n": "Dedos de pescado con salsa tártara", "e": "Fish fingers with tartar sauce", "p": "₡4.900", "g": "Aperitivos calientes"}]}, {"t": "Sopas, arroces y pastas", "img": "./assets/fd085d442968d315679a7e9aca5ad246.jpg", "alt": "Pasta con camarones y pan con ajo", "L1": [{"n": "Sopa de pescado con zumo de limón", "e": "Fish soup with lemon zest", "p": "₡4.000", "g": "Sopas"}, {"n": "Sopa de mariscos", "e": "Seafood soup", "p": "₡5.500", "g": "Sopas"}, {"n": "Bisquet de camarón", "e": "Shrimp bisque", "p": "₡6.000", "g": "Sopas"}, {"n": "Arroz con camarones", "e": "Rice with shrimp", "p": "₡5.000", "g": "Arroces"}, {"n": "Arroz con mariscos", "e": "Rice with seafood", "p": "₡6.000", "g": "Arroces"}, {"n": "Arroz con calamares", "e": "Rice with squid", "p": "₡4.500", "g": "Arroces"}, {"n": "Arroz vegetariano", "e": "Vegetarian rice", "p": "₡4.000", "g": "Arroces"}, {"n": "Pasta con mariscos", "e": "Seafood pasta", "p": "₡6.000", "g": "Pastas"}, {"n": "Pasta con camarones", "e": "Shrimp pasta", "p": "₡6.500", "g": "Pastas"}, {"n": "Pasta con calamares", "e": "Squid pasta", "p": "₡5.000", "g": "Pastas"}, {"n": "Pasta vegetariana", "e": "Vegetarian pasta", "p": "₡4.000", "g": "Pastas"}], "L2": [{"n": "Sopa de pescado con zumo de limón", "e": "Fish soup with lemon zest", "p": "₡4.900", "g": "Sopas"}, {"n": "Sopa de mariscos", "e": "Seafood soup", "p": "₡6.700", "g": "Sopas"}, {"n": "Bisquet de camarón", "e": "Shrimp bisque", "p": "₡6.100", "g": "Sopas"}, {"n": "Arroz con camarones", "e": "Rice with shrimp", "p": "₡6.100", "g": "Arroces"}, {"n": "Arroz con mariscos", "e": "Rice with seafood", "p": "₡6.700", "g": "Arroces"}, {"n": "Arroz con calamares", "e": "Rice with squid", "p": "₡5.600", "g": "Arroces"}, {"n": "Arroz vegetariano", "e": "Vegetarian rice", "p": "₡4.900", "g": "Arroces"}, {"n": "Pasta con mariscos", "e": "Seafood pasta", "p": "₡6.900", "g": "Pastas"}, {"n": "Pasta con camarones", "e": "Shrimp pasta", "p": "₡6.500", "g": "Pastas"}, {"n": "Pasta con calamares", "e": "Squid pasta", "p": "₡5.800", "g": "Pastas"}, {"n": "Pasta vegetariana", "e": "Vegetarian pasta", "p": "₡4.900", "g": "Pastas"}]}, {"t": "Mariscos y camarones", "img": "./assets/0417de9f369187f99884a4a6e80f2ba1.jpg", "alt": "Platón de mariscos con langosta, mejillones y camarones", "L1": [{"n": "Mariscos a la veracruzana", "e": "Veracruzana-style seafood", "p": "₡9.500", "g": "Mariscos"}, {"n": "Mariscos al ajillo", "e": "Seafood marinated with garlic", "p": "₡9.500", "g": "Mariscos"}, {"n": "Mariscos gratinados", "e": "Seafood with gratinated cheese", "p": "₡9.500", "g": "Mariscos"}, {"n": "Mariscos a la plancha", "e": "Grilled seafood", "p": "₡9.500", "g": "Mariscos"}, {"n": "Mariscos empanizados", "e": "Breaded seafood, cocktail & tartar sauce", "p": "₡9.500", "g": "Mariscos"}, {"n": "Jumbo New Orleans", "e": "New Orleans jumbo shrimp", "p": "₡10.000", "g": "Camarones"}, {"n": "Jumbo étouffée estilo cajún", "e": "Cajun-style étouffée jumbo shrimp", "p": "₡10.000", "g": "Camarones"}, {"n": "Jumbo coco", "e": "Coconut jumbo shrimp with mango marmalade", "p": "₡10.000", "g": "Camarones"}, {"n": "Jumbo empanizado", "e": "Breaded jumbo shrimp with cocktail sauce", "p": "₡10.000", "g": "Camarones"}, {"n": "Jumbo costeño", "e": "Costeño-style jumbo shrimp", "p": "₡12.000", "g": "Camarones"}, {"n": "Jumbo al ajillo", "e": "Jumbo shrimp marinated with garlic", "p": "₡10.000", "g": "Camarones"}, {"n": "Calamares a la plancha", "e": "Grilled squid", "p": "₡5.500", "g": "Calamares"}, {"n": "Calamares al ajillo", "e": "Squid marinated with garlic", "p": "₡5.500", "g": "Calamares"}, {"n": "Calamares empanizados", "e": "Breaded squid with tartar sauce", "p": "₡5.500", "g": "Calamares"}], "L2": [{"n": "Mariscos a la veracruzana", "e": "Veracruzana-style seafood", "p": "₡11.500", "g": "Mariscos"}, {"n": "Mariscos al ajillo", "e": "Seafood marinated with garlic", "p": "₡11.500", "g": "Mariscos"}, {"n": "Mariscos gratinados", "e": "Seafood with gratinated cheese", "p": "₡11.500", "g": "Mariscos"}, {"n": "Mariscos a la plancha", "e": "Grilled seafood", "p": "₡11.500", "g": "Mariscos"}, {"n": "Mariscos empanizados", "e": "Breaded seafood, cocktail & tartar sauce", "p": "₡11.500", "g": "Mariscos"}, {"n": "Jumbo New Orleans", "e": "New Orleans jumbo shrimp", "p": "₡11.500", "g": "Camarones"}, {"n": "Jumbo étouffée estilo cajún", "e": "Cajun-style étouffée jumbo shrimp", "p": "₡11.500", "g": "Camarones"}, {"n": "Jumbo coco", "e": "Coconut jumbo shrimp with mango marmalade", "p": "₡11.500", "g": "Camarones"}, {"n": "Jumbo empanizado", "e": "Breaded jumbo shrimp with cocktail sauce", "p": "₡11.000", "g": "Camarones"}, {"n": "Jumbo costeño", "e": "Costeño-style jumbo shrimp", "p": "₡14.000", "g": "Camarones"}, {"n": "Jumbo al ajillo", "e": "Jumbo shrimp marinated with garlic", "p": "₡11.000", "g": "Camarones"}, {"n": "Calamares a la plancha", "e": "Grilled squid", "p": "₡7.250", "g": "Calamares"}, {"n": "Calamares al ajillo", "e": "Squid marinated with garlic", "p": "₡7.250", "g": "Calamares"}, {"n": "Calamares empanizados", "e": "Breaded squid with tartar sauce", "p": "₡7.250", "g": "Calamares"}]}, {"t": "Pescados", "img": "./assets/1304f3f2333fdd2340f856c0261c5cc8.jpg", "alt": "Pargo entero a la parrilla con vegetales y puré", "L1": [{"n": "Filete tropical flambeado", "e": "Tropical-style filet flambéed with sambuca", "p": "₡7.000", "g": "Pescado"}, {"n": "Filete empanizado", "e": "Breaded fish filet", "p": "₡6.500", "g": "Pescado"}, {"n": "Filete a la plancha", "e": "Grilled filet with olive oil and fresh herbs", "p": "₡6.500", "g": "Pescado"}, {"n": "Filete al ajillo", "e": "Filet marinated with garlic", "p": "₡7.000", "g": "Pescado"}, {"n": "Filete de atún con salsa de jengibre", "e": "Tuna filet with ginger sauce", "p": "₡7.000", "g": "Pescado"}, {"n": "Filete salteado a la veracruzana", "e": "Veracruzana-style fish filet", "p": "₡7.000", "g": "Pescado"}, {"n": "Filete cajún blackened", "e": "Cajun-style blackened filet", "p": "₡7.000", "g": "Pescado"}, {"n": "Filete relleno de camarones", "e": "Shrimp-stuffed filet", "p": "₡9.000", "g": "Pescado"}, {"n": "Filete en salsa de mariscos", "e": "Fish filet in seafood sauce", "p": "₡9.000", "g": "Pescado"}, {"n": "Pargo entero frito o a la plancha", "e": "Whole red snapper, fried or grilled", "p": "Consultar", "g": "Pargo entero"}, {"n": "Pargo entero a la veracruzana", "e": "Whole snapper in veracruz sauce", "p": "Consultar", "g": "Pargo entero"}], "L2": [{"n": "Filete tropical flambeado", "e": "Tropical-style filet flambéed with sambuca", "p": "₡7.800", "g": "Pescado"}, {"n": "Filete empanizado", "e": "Breaded fish filet", "p": "₡6.700", "g": "Pescado"}, {"n": "Filete a la plancha", "e": "Grilled filet with olive oil and fresh herbs", "p": "₡6.700", "g": "Pescado"}, {"n": "Filete al ajillo", "e": "Filet marinated with garlic", "p": "₡7.800", "g": "Pescado"}, {"n": "Filete de atún con salsa de jengibre", "e": "Tuna filet with ginger sauce", "p": "₡7.800", "g": "Pescado"}, {"n": "Filete salteado a la veracruzana", "e": "Veracruzana-style fish filet", "p": "₡7.800", "g": "Pescado"}, {"n": "Filete cajún blackened", "e": "Cajun-style blackened filet", "p": "₡7.800", "g": "Pescado"}, {"n": "Filete relleno de camarones", "e": "Shrimp-stuffed filet", "p": "₡10.650", "g": "Pescado"}, {"n": "Filete en salsa de mariscos", "e": "Fish filet in seafood sauce", "p": "₡10.650", "g": "Pescado"}, {"n": "Pargo entero frito o a la plancha", "e": "Whole red snapper, fried or grilled", "p": "Consultar", "g": "Pargo entero"}, {"n": "Pargo entero a la veracruzana", "e": "Whole snapper in veracruz sauce", "p": "Consultar", "g": "Pargo entero"}]}, {"t": "Langosta", "img": "./assets/459915ab8f8287dc07939d226c628d09.jpg", "alt": "Langosta tropical con salsa de mango", "L1": [{"n": "Langosta tropical", "e": "Tropical-style lobster", "p": "₡18.000", "g": "Langosta"}, {"n": "Langosta rellena de mariscos", "e": "Seafood-stuffed lobster", "p": "₡20.000", "g": "Langosta"}, {"n": "Langosta al termidor", "e": "Lobster thermidor", "p": "₡18.000", "g": "Langosta"}, {"n": "Mar y tierra", "e": "Surf & turf", "p": "₡20.000", "g": "Especiales"}, {"n": "Chef trío", "e": "Shrimp, lobster & tenderloin in red wine & honey sauce", "p": "₡22.000", "g": "Especiales"}], "L2": [{"n": "Langosta tropical", "e": "Tropical-style lobster", "p": "₡21.950", "g": "Langosta"}, {"n": "Langosta rellena de mariscos", "e": "Seafood-stuffed lobster", "p": "₡24.000", "g": "Langosta"}, {"n": "Langosta al termidor", "e": "Lobster thermidor", "p": "₡21.950", "g": "Langosta"}, {"n": "Mar y tierra", "e": "Surf & turf", "p": "₡24.000", "g": "Especiales"}, {"n": "Chef trío", "e": "Shrimp, lobster & tenderloin in red wine & honey sauce", "p": "₡25.900", "g": "Especiales"}]}, {"t": "Carnes y pollo", "img": "./assets/815c0ce9db931a4e5df4a0be3a222ffc.jpg", "alt": "Corte a la plancha con ajo y cebollín", "L1": [{"n": "New York strip", "e": "Grilled steak with fresh herbs and garlic", "p": "₡9.000", "g": "Carnes"}, {"n": "Lomo gratinado", "e": "Tenderloin with gratinated mozzarella", "p": "₡11.000", "g": "Carnes"}, {"n": "Lomito gorgonzola", "e": "Tenderloin with gorgonzola", "p": "₡11.000", "g": "Carnes"}, {"n": "Lomito con salsa de hongos", "e": "Tenderloin with mushroom sauce", "p": "₡11.000", "g": "Carnes"}, {"n": "Lomito a la plancha", "e": "Grilled tenderloin with fresh herbs", "p": "₡10.000", "g": "Carnes"}, {"n": "Ribeye", "e": "Ribeye", "p": "₡10.000", "g": "Carnes"}, {"n": "Costillas fritas", "e": "Fried ribs", "p": "₡4.500", "g": "Carnes"}, {"n": "Pechuga a la plancha", "e": "Grilled chicken with fresh herbs", "p": "₡5.000", "g": "Pollo"}, {"n": "Pollo cordon blue", "e": "Cordon bleu chicken with mushroom sauce", "p": "₡6.500", "g": "Pollo"}, {"n": "Pechuga rellena", "e": "Stuffed chicken breast with mushroom sauce", "p": "₡6.500", "g": "Pollo"}, {"n": "Alitas fritas", "e": "Fried wings", "p": "₡4.000", "g": "Pollo"}], "L2": [{"n": "New York strip", "e": "Grilled steak with fresh herbs and garlic", "p": "₡11.000", "g": "Carnes"}, {"n": "Lomo gratinado", "e": "Tenderloin with gratinated mozzarella", "p": "₡11.500", "g": "Carnes"}, {"n": "Lomito gorgonzola", "e": "Tenderloin with gorgonzola", "p": "₡12.000", "g": "Carnes"}, {"n": "Lomito con salsa de hongos", "e": "Tenderloin with mushroom sauce", "p": "₡12.000", "g": "Carnes"}, {"n": "Lomito a la plancha", "e": "Grilled tenderloin with fresh herbs", "p": "₡10.000", "g": "Carnes"}, {"n": "Ribeye", "e": "Ribeye", "p": "₡10.000", "g": "Carnes"}, {"n": "Pechuga a la plancha", "e": "Grilled chicken with fresh herbs", "p": "₡6.700", "g": "Pollo"}, {"n": "Pollo cordon blue", "e": "Cordon bleu chicken with mushroom sauce", "p": "₡7.900", "g": "Pollo"}, {"n": "Pechuga rellena", "e": "Stuffed chicken breast with mushroom sauce", "p": "₡7.900", "g": "Pollo"}]}];
+const LOCS = {"L1": {"brand": "Donde Mario", "place": "Sardinal", "full": "Bar y Restaurante Donde Mario", "addr": "800 m al sur de la iglesia católica de Sardinal, Carrillo, Guanacaste", "hours": "11:00 a. m. – 9:30 p. m.", "tel": "8905 0330", "telHref": "tel:+50689050330", "wa": "https://wa.me/50689050330", "waLabel": "WhatsApp 8905 0330", "ig": "@dondemariorestobar", "igHref": "https://www.instagram.com/dondemariorestobar/", "maps": "https://www.google.com/maps/place/Donde+Mario/@10.5060659,-85.6500054,17z/data=!3m1!4b1!4m6!3m5!1s0x8f9e2bb7d3ab4127:0x78598b9c78a79f5a!8m2!3d10.5060659!4d-85.6474305!16s%2Fg%2F11krfmssw2", "img": "./assets/746bb916bf63927221db6ad0497f8a9c.jpg", "imgAlt": "Fachada de Donde Mario Seafood & Steak House en Sardinal", "logo": "./assets/5feb9e093da5fcacbec4291113d092da.png", "tax": "Precios con impuesto de venta incluido. Impuesto de servicio no incluido."}, "L2": {"brand": "La Casita del Marisco", "place": "Playa Hermosa", "full": "Bar y Restaurante La Casita del Marisco", "addr": "Playa Hermosa, segunda entrada, frente al condominio Las Brisas, a un costado del Hotel Condovac La Costa", "hours": "11:30 a. m. – 9:00 p. m.", "tel": "2672 0226", "telHref": "tel:+50626720226", "wa": "tel:+50626720226", "waLabel": "Llamar 2672 0226", "ig": "@la_casitadel_marisco", "igHref": "https://www.instagram.com/la_casitadel_marisco/", "maps": "https://www.google.com/maps/search/?api=1&query=La+Casita+del+Marisco+Playa+Hermosa+Guanacaste", "img": "./assets/556f190d61082b2032b6b5f4592f92d8.jpg", "imgAlt": "Terraza de madera de La Casita del Marisco frente a la playa en Playa Hermosa", "logo": "./assets/0a7e4e5b4f87e43c0ebdcae0f220e389.jpg", "tax": "Precios en colones costarricenses."}};
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cat: 1, loc: 1, navOpen: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const set = (k, v) => () => this.setState({ [k]: v });
+    const cat = MENU[s.cat - 1];
+    const key = s.loc === 1 ? 'L1' : 'L2';
+    const L = LOCS[key];
+    const v = {
+      items: cat[key], catTitle: cat.t, catImg: cat.img, catAlt: cat.alt, catCount: cat[key].length,
+      L: L, l1: s.loc === 1, l2: s.loc === 2, pickL1: set('loc', 1), pickL2: set('loc', 2),
+      locX: s.loc === 1 ? '0%' : '100%', indX: ((s.cat - 1) * 100) + '%',
+      navOpen: s.navOpen, openNav: set('navOpen', true), closeNav: set('navOpen', false)
+    };
+    for (let i = 1; i <= MENU.length; i++) { v['c' + i] = s.cat === i; v['pick' + i] = set('cat', i); }
+    
+    return v;
+  }
+}
+</script>
+</body>
+</html>
